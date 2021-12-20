@@ -2,9 +2,9 @@ import React from 'react'
 
 const NavBar = ()=> {
     return (
-        <nav class="navbar navbar-dark bg-dark" style={{marginBottom: 50}}>
-            <div class="container-fluid">
-                <span class="navbar-text">
+        <nav className="navbar navbar-dark bg-dark" style={{marginBottom: 50}}>
+            <div className="container-fluid">
+                <span className="navbar-text">
                     Front-End
                 </span>
             </div>
