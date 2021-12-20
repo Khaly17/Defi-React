@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-const Index = () => {
 
+const Index = () => {
    const [gitData, setGitData] = useState([])
    const [count, setcount] = useState(1)
-   const api = `https://api.github.com/search/repositories?q=created:%3E2021-12-18&sort=stars&order=desc&page=${count}`
-   const api2 = `https://api.github.com/search/repositories?q=created:%3E2021-12-18&sort=stars&order=desc&page=${count-1}`
+   const api1 = `https://api.github.com/search/repositories?q=created:%3E2017-11-22&sort=stars&order=desc&page=${count}`
+   const api2 = `https://api.github.com/search/repositories?q=created:%3E2017-11-22&sort=stars&order=desc&page=${count-1}`
 
    const getData = ()=>{
-    axios.get(api)
+    axios.get(api1)
     .then(response => {
         console.log('response: ',response.data)
         setGitData(response.data.items)
@@ -36,47 +36,33 @@ const Index = () => {
 
     return (
         <>
+          <div className="container">
 
-            <div className='container'>
-            <table class="table">
-                       <thead>
-                         <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Nom_Depot</th>
-                           <th scope="col">Description</th>
-                           <th scope="col">Nombre_Etoile</th>
-                           <th scope='col'>Nombre_Emission</th>
-                           <th scope='col'>Nom_Utilisateur</th>
-                           <th scope='col'>Avartar</th>
+            {
+              gitData.map((item, index) => {
+              return(
 
-                         </tr>
-                       </thead>
-                       <tbody>
-                {
-                   gitData.map((item, index) => {
-                       return (
-                       //<h1 key={index} id= {index}>{item.id} </h1>
-                         <>
-                         <tr key={index} id= {index}>
-                           <th scope="row">{item.id}</th>
-                           <td>{item.name}</td>  
-                           <td>{item.description}</td>
-                           <td>{item.stargazers_count}</td>
-                           <td>{item.open_issues_count}</td>
-                           <td>{item.owner.login}</td>
-                           <td><img src={item.owner.avatar_url} alt='user' style={{width:50, height: 50, borderRadius: 40}}/></td>
-                         </tr>
-                         </>
-                        )
-                   }
-                   )
+                <div className="row" key={index} id= {index}>
 
-                }
-                 </tbody>
-                     </table>
-                     <button onClick={Decr} className='btn btn-secondary' style={{marginRight: 10}}>precedent</button>
-                     <button onClick={getData} className='btn btn-primary'>suivant</button>
-            </div>
+                  <div className="col-1">
+                    <img src={item.owner.avatar_url} alt='user' style={{width:50, height: 50}}/>                
+                  </div>
+
+                  <div className="col-9">
+                      <strong>{item.name}</strong>
+                      <p>{item.description}</p>
+                      <p>Stars: {item.stargazers_count} Issues: {item.open_issues_count} Submitted 30 days ago by {item.owner.login} </p>
+                  </div>
+
+                </div>
+
+              )
+              })
+            }
+
+          </div>
+          <button onClick={Decr} className='btn btn-secondary' style={{marginRight: 10}}>precedent</button>
+          <button onClick={getData} className='btn btn-primary'>suivant</button>
         </>
     )
 }
