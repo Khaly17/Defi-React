@@ -4,26 +4,27 @@ import axios from 'axios'
 const Index = () => {
    const [gitData, setGitData] = useState([])
    const [count, setcount] = useState(1)
-   const api1 = `https://api.github.com/search/repositories?q=created:%3E2017-11-22&sort=stars&order=desc&page=${count}`
-   const api2 = `https://api.github.com/search/repositories?q=created:%3E2017-11-22&sort=stars&order=desc&page=${count-1}`
-
+   const api = 'https://api.github.com/search/repositories?q=created:%3E2017-11-22&sort=stars&order=desc&page='
+   
    const getData = ()=>{
-    axios.get(api1)
+    axios.get(`${api}+${count}`)
     .then(response => {
-        console.log('response: ',response.data)
+
         setGitData(response.data.items)
         setcount(count+1)
+
     })
     .catch(err=>console.log("Error",err))
    }
 
    const Decr = ()=>{
       if(count > 1) {
-        axios.get(api2)
+        axios.get(`${api}+${count-1}`)
         .then(response => {
-            console.log('response: ',response.data)
+
             setGitData(response.data.items)
             setcount(count+1)
+            
         })
         .catch(err=>console.log("Error",err))
       }
