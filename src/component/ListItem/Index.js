@@ -46,7 +46,7 @@ const Index = () => {
                 <div className="row" key={index} id= {index}>
 
                   <div className="col-1">
-                    <img src={item.owner.avatar_url} alt='user' style={{width:50, height: 50}}/>                
+                    <img src={item.owner.avatar_url} alt='user' style={{width:90, height: 90}}/>                
                   </div>
 
                   <div className="col-9">
@@ -61,9 +61,11 @@ const Index = () => {
               })
             }
 
-          </div>
           <button onClick={Decr} className='btn btn-secondary' style={{marginRight: 10}}>precedent</button>
           <button onClick={getData} className='btn btn-primary'>suivant</button>
+
+          </div>
+          
         </>
     )
 }
